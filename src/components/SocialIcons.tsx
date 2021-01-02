@@ -9,16 +9,14 @@ import FlexView from "./FlexView";
 const SocialIcons = () => {
     const { darkMode } = useContext(GlobalContext);
     const { background, textLight } = useColors();
-    const onPressTwitter = useLinker("https://twitter.com/sushiswap", "", "_blank");
-    const onPressGithub = useLinker("https://github.com/sushiswap", "", "_blank");
-    const onPressDiscord = useLinker("https://discord.gg/YS8xH7E", "", "_blank");
+    const onPressTwitter = useLinker("https://twitter.com/halodefi", "", "_blank");
+    const onPressTelegram = useLinker("http://t.me/HaloDeFi", "", "_blank");
     return (
         <FlexView style={{ width: "100%", justifyContent: "center" }}>
-            <SocialIcon type="github-alt" onPress={onPressGithub} />
             <SocialIcon type="twitter" onPress={onPressTwitter} />
             <Icon
                 type={"material-community"}
-                name={"discord"}
+                name={"telegram"}
                 raised={true}
                 reverse={true}
                 color={background}
@@ -28,7 +26,7 @@ const SocialIcons = () => {
                     borderWidth: 1,
                     borderColor: darkMode ? "white" : textLight
                 }}
-                onPress={onPressDiscord}
+                onPress={onPressTelegram}
             />
         </FlexView>
     );
