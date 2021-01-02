@@ -19,7 +19,7 @@ export interface WebHeaderProps {
 }
 
 const WebHeader: FC<WebHeaderProps> = props => {
-    const { header, borderDark } = useColors();
+    const { header, topborder } = useColors();
     return (
         <View
             // @ts-ignore
@@ -32,7 +32,7 @@ const WebHeader: FC<WebHeaderProps> = props => {
                 paddingBottom: Spacing.small,
                 backgroundColor: header,
                 borderBottomWidth: 1,
-                borderColor: borderDark
+                borderColor: topborder
             }}>
             <FlexView
                 style={{
@@ -57,7 +57,7 @@ export const Title = () => {
     return (
         <View style={{ alignSelf: "center" }}>
             <Link to={"/"} style={{ textDecoration: "none" }}>
-                <SvgLogo width={259} height={45} style={{ marginTop: 8, marginLeft: -16 }} />
+                <SvgLogo width={259} height={48} style={{ marginTop: 20, marginLeft: -16 }} />
             </Link>
         </View>
     );
@@ -69,26 +69,42 @@ const Menu = () => {
         <FlexView
             style={{
                 height: "100%",
-                alignItems: "center"
+                alignItems: "center",
+                flex: 1
             }}>
-            <MenuItem title={t("menu.home")} path={"/"} />
-            <MenuItem title={t("menu.swap")} path={"/swap"} />
-            <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
-            <MenuItem title={t("menu.migrate")} path={"/migrate"} />
-            <MenuItem title={t("menu.stake")} path={"/staking"} />
-            <MenuItem title={t("menu.farm")} path={"/farming"} />
-            <DarkModeSwitch style={{ marginLeft: Spacing.small }} />
+            <MenuItemBlock />
+            {/*<DarkModeSwitch style={{ marginLeft: 'auto' }} />*/}
             <Status />
         </FlexView>
     );
 };
+
+const MenuItemBlock = () => {
+    const t = useTranslation();
+    return (
+    <FlexView
+            style={{
+                height: "100%",
+                alignItems: "center",
+                marginLeft: 'auto'
+            }}>
+            <MenuItem title={t("menu.home")} path={"/"} />
+            <MenuItem title={t("menu.swap")} path={"/swap"} />
+            <MenuItem title={t("menu.liquidity")} path={"/liquidity"} />
+            {/*<MenuItem title={t("menu.migrate")} path={"/migrate"} />*/}
+            <MenuItem title={t("menu.stake")} path={"/staking"} />
+            <MenuItem title={t("menu.farm")} path={"/farming"} />
+        </FlexView>
+    );
+};
+
 
 const MenuItem = ({ title, path }) => {
     const { textDark, textLight } = useColors();
     const match = useRouteMatch(path);
     const active = (path === "/" ? match?.isExact : true) && match?.path?.startsWith(path);
     return (
-        <Link to={path} style={{ marginLeft: Spacing.tiny, marginBottom: -4, textDecoration: "none" }}>
+        <Link to={path} style={{ marginLeft: 'auto', marginRight: '40px', marginBottom: -4, textDecoration: "none" }}>
             <Text
                 style={{
                     fontFamily: "regular",
@@ -104,7 +120,7 @@ const MenuItem = ({ title, path }) => {
 
 const MenuIcon = ({ onExpand }) => {
     const { textDark } = useColors();
-    return <Icon type={"material-community"} name={"menu"} size={28} color={textDark} onPress={onExpand} />;
+    return <Icon type={"material-community"} name={"menu"} size={28}  containerStyle={{marginBottom: 'auto', marginTop: '20px'}} color={textDark} onPress={onExpand} />;
 };
 
 const Status = () => {
@@ -120,13 +136,12 @@ const Status = () => {
         if (confirm(t("do-you-want-to-disconnect"))) ethereum?.disconnect?.();
     };
     return (
-        <TouchableHighlight onPress={onPress} disabled={!ethereum?.isWalletConnect}>
+        <TouchableHighlight style={{marginLeft: 'auto'}} onPress={onPress} disabled={!ethereum?.isWalletConnect}>
             <FlexView
                 style={{
                     height: 28,
                     justifyContent: "center",
                     alignItems: "center",
-                    marginLeft: Spacing.small,
                     paddingHorizontal: Spacing.small,
                     borderRadius: 16,
                     borderWidth: 1,

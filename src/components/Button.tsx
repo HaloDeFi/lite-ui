@@ -18,7 +18,7 @@ const Button: FC<ButtonProps> = props => {
     const height = props.size === "small" ? 36 : size === "normal" ? 45 : 54;
     const fontSize = props.size === "small" ? 13 : size === "normal" ? 15 : 18;
     const fontFamily = props.fontWeight || "regular";
-    const color = type === "solid" ? "white" : props.color || textMedium;
+    const color = type === "solid" ? "#000" : props.color || textMedium;
     return (
         <NativeButton
             {...props}

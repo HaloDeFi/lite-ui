@@ -63,21 +63,21 @@ const AddLiquidity = () => {
     const state = useAddLiquidityState();
     return (
         <View style={{ marginTop: Spacing.large }}>
-            {/*<ModeSelect state={state} />*/}
-            {/*<Border />*/}
+            <ModeSelect state={state} />
+            <Border />
             <FromTokenSelect state={state} />
             <Border />
             <ToTokenSelect state={state} />
             <Border />
             <FromTokenInput state={state} />
-            {/*{state.mode === "zapper" ? (
+            {state.mode === "zapper" ? (
                 <ZapNotice state={state} />
-            ) : (*/}
+            ) : (
             <>
                 <ItemSeparator />
                 <ToTokenInput state={state} />
             </>
-            {/*)}*/}
+            )}
             <PriceInfo state={state} />
         </View>
     );
@@ -106,6 +106,9 @@ const ModeSelect = ({ state }: { state: AddLiquidityState }) => {
 const FromTokenSelect = ({ state }: { state: AddLiquidityState }) => {
     const t = useTranslation();
     const { customTokens } = useContext(EthersContext);
+    if (!state.mode) {
+        return <Heading text={t("1st-token")} disabled={true} />;
+    }
     return (
         <TokenSelect
             title={t("1st-token")}
@@ -152,7 +155,7 @@ const FromTokenInput = ({ state }: { state: AddLiquidityState }) => {
     };
     return (
         <TokenInput
-            title={/*state.mode === "zapper" ? t("amount-of-", { symbol: state.fromSymbol }) :*/ t("amount-of-tokens")}
+            title={state.mode === "zapper" ? t("amount-of-", { symbol: state.fromSymbol }) : t("amount-of-tokens")}
             token={state.fromToken}
             amount={state.fromAmount}
             onAmountChanged={onAmountChanged}
@@ -209,22 +212,22 @@ const FirstProviderInfo = ({ state }: { state: AddLiquidityState }) => {
         parseBalance(state.toAmount, state.toToken!.decimals),
         parseBalance(state.fromAmount, state.fromToken!.decimals)
     ).toString(8);
-    /*const zap = state.mode === "zapper";*/
+    const zap = state.mode === "zapper";
     return (
         <View>
-            {/*{!zap && (*/}
+           {!zap && (
             <InfoBox style={{ marginTop: Spacing.normal }}>
                 <PriceMeta state={state} price={initialPrice} disabled={noAmount} />
                 <FirstProviderControls state={state} />
             </InfoBox>
-            {/*)}*/}
+            )}
             {!isETHWETHPair(state.fromToken, state.toToken) && (
                 <Notice
                     text={
                         t("first-provider-desc-1") +
-                        /*zap ? t("first-provider-desc-zap") : */ t("first-provider-desc-2")
+                        zap ? t("first-provider-desc-zap") : t("first-provider-desc-2")
                     }
-                    color={/*zap ? red : */ green}
+                    color={zap ? red : green}
                     style={{ marginTop: Spacing.small }}
                 />
             )}
