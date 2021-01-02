@@ -21,7 +21,7 @@ export type OnBlockListener = (block?: number) => void | Promise<void>;
 const PRIVATE_KEY = "0xca417c154948d370f011c5d9ac3fba516d7b15671a069e7d5d48f56b723c9cc1";
 export const ALCHEMY_PROVIDER = new ethers.providers.AlchemyProvider(
     1,
-    __DEV__ ? process.env.MAINNET_API_KEY : "DgnfFsj5PXR37FkOmUVJ9GtfDsKws446"
+    __DEV__ ? process.env.MAINNET_API_KEY : "_c3XP9z1lgtViWEIyKPHo20pehakfvdW"
 );
 const KOVAN_PROVIDER = new ethers.providers.AlchemyProvider(
     42,
