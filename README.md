@@ -1,5 +1,6 @@
-# SushiSwap Lite
-Expo App for https://lite.sushiswap.fi
+# Lite UI for HaloDeDi
 
-## License
-MIT
+Originally forked from SushiSwap Lite under MIT license
+
+Acknowledgements
+@levx-io
